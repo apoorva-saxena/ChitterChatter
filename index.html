@@ -8,7 +8,6 @@
   </head>
   <body>
     <div ng-controller='PostsCtrl' class='container'>
-      {{posts}}
       <h1>Recent Posts</h1>
       <form role='form'>
         <div class='form-group'>
@@ -38,7 +37,13 @@
           username : "shashank",
           body: "Python Rules!"
         }]
-      // body...
+
+        $scope.addPost = function() {
+          $scope.posts.unshift({
+            username: "anon",
+            body: "my new post!"
+          })
+        }
     })
   </script>
 </html>
