@@ -2,9 +2,13 @@
 <html ng-app='app'>
   <head>
     <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
   </head>
   <body>
     <div ng-controller='PostsCtrl' class='container'>
+      {{posts}}
       <h1>Recent Posts</h1>
       <form role='form'>
         <div class='form-group'>
@@ -18,10 +22,23 @@
       </form>
       <ul class='list-group'>
         <li ng-repeat='post in posts' class='list-group-item'>
-          <strong>@apoorvaRocks</strong>
-          <span>Nodejs rocks sucks</span>
+          <strong>@{{post.username}}</strong>
+          <span>{{post.body}}</span>
         </li>
       </ul>
     </div>
   </body>
+  <script>
+    var app = angular.module('app', [])
+    app.controller('PostsCtrl', function ($scope) {
+        $scope.posts = [{
+          username : "apoorva",
+          body: "Node Rules!"
+        }, {
+          username : "shashank",
+          body: "Python Rules!"
+        }]
+      // body...
+    })
+  </script>
 </html>
