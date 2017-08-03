@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html ng-app='app'>
-  <head>
+
+<head>
     <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <!-- <script src="app.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div ng-controller='PostsCtrl' class='container'>
-      <h1>Recent Posts</h1>
-      <form role='form'>
-        <div class='form-group'>
-          <div class="input-group">
-            <input ng-model="postBody" class='form-control'>
-            <span class='input-group-btn'>
+        <h1>Recent Posts</h1>
+        <form role='form'>
+            <div class='form-group'>
+                <div class="input-group">
+                    <input ng-model="postBody" class='form-control'>
+                    <span class='input-group-btn'>
               <button ng-click='addPost()' class='btn btn-default'>Add Post</button>
             </span>
-          </div>
-        </div>
-      </form>
-      <ul class='list-group'>
-        <li ng-repeat='post in posts' class='list-group-item'>
-          <strong>@{{post.username}}</strong>
-          <span>{{post.body}}</span>
-        </li>
-      </ul>
+                </div>
+            </div>
+        </form>
+        <ul class='list-group'>
+            <li ng-repeat='post in posts' class='list-group-item'>
+                <strong>@{{post.username}}</strong>
+                <span>{{post.body}}</span>
+            </li>
+        </ul>
     </div>
-  </body>
-  <script>
-    var app = angular.module('app', [])
-    app.controller('PostsCtrl', function ($scope) {
-        $scope.posts = [{
-          username : "apoorva",
-          body: "Node Rules!"
-        }, {
-          username : "shashank",
-          body: "Python Rules!"
-        }]
+</body>
+<script>
+var app = angular.module('app', [])
+app.controller('PostsCtrl', function($scope) {
 
-        $scope.addPost = function() {
-          $scope.posts.unshift({
-            username: "anon",
-            body: "my new post!"
-          })
+    $scope.posts = [{
+        username: "apoorva",
+        body: "Node Rules!"
+    }, {
+        username: "shashank",
+        body: "Python Rules!"
+    }]
+
+    $scope.addPost = function() {
+        if ($scope.postBody) {
+            $scope.posts.unshift({
+                username: "anon",
+                body: $scope.postBody
+            })
+            $scope.postBody = null
         }
-    })
-  </script>
+    }
+})
+</script>
+
 </html>
