@@ -1,29 +1,32 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-
+const Post = require('./models/post')
 var app = express()
 
 app.use(bodyParser.json())
 
 app.get('/api/posts', function(req, res) {
-    res.json([
-    	{
-    		username : "Apoorva",
-    		body : "Node Rocks!"
-
+    Post.find(function (err, posts) {
+        if(err) {
+            console.log("Error: ", err)
         }
-
-    ])
+        res.json(posts)
+    })
 
 })
 
 app.post('/api/posts', function (req, res) {
-	console.log('post recievd=====')
-    // console.log(req.body.username)
-	console.log(req.query.username)
-    // console.log(req.body.body)
-    console.log(req.query.body)
-	res.send(201)
+    var post = new Post ({
+        username : req.query.username,
+        body: req.query.body
+    })
+
+    post.save(function (err, post) {
+        if (err) {
+            console.log(err)
+        }
+        res.json(201, post)
+    })
 })
 
 app.listen(3000, function () {
