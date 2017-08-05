@@ -5,6 +5,8 @@ var app = express()
 
 app.use(bodyParser.json())
 
+app.use(express.static(__dirname + '/app'))
+
 app.get('/api/posts', function(req, res) {
     Post.find(function (err, posts) {
         if(err) {

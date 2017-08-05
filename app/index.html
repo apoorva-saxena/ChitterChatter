@@ -23,6 +23,7 @@
         </form>
         <ul class='list-group'>
             <li ng-repeat='post in posts' class='list-group-item'>
+
                 <strong>@{{post.username}}</strong>
                 <span>{{post.body}}</span>
             </li>
@@ -32,16 +33,18 @@
 <script>
 var app = angular.module('app', [])
 app.controller('PostsCtrl', function($scope, $http) {
+
+   
     return $http({
             method: 'GET',
             url: 'http://localhost:3000/api/posts'
         }).then(function successCallback(response) {
-            console.log("=========1")
             console.log(response)
             $scope.posts = response.data
         }, function errorCallback(response) {
             console.log(response)
         });
+
 
     $scope.addPost = function() {
         if ($scope.postBody) {
