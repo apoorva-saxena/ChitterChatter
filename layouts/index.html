@@ -33,8 +33,6 @@
 <script>
 var app = angular.module('app', [])
 app.controller('PostsCtrl', function($scope, $http) {
-
-   
     return $http({
             method: 'GET',
             url: 'http://localhost:3000/api/posts'
@@ -44,8 +42,6 @@ app.controller('PostsCtrl', function($scope, $http) {
         }, function errorCallback(response) {
             console.log(response)
         });
-
-
     $scope.addPost = function() {
         if ($scope.postBody) {
             $scope.posts.unshift({
