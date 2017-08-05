@@ -22,14 +22,15 @@ app.get('/api/posts', function(req, res) {
 
 app.post('/api/posts', function (req, res) {
     var post = new Post ({
-        username : req.query.username,
-        body: req.query.body
+        username : req.body.username,
+        body: req.body.body
     })
 
     post.save(function (err, post) {
         if (err) {
             console.log(err)
         }
+        console.log("data was saved in database")
         res.json(201, post)
     })
 })
